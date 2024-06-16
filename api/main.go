@@ -1,6 +1,7 @@
 package main
 
 import (
+	"api/src/config"
 	"api/src/router"
 	"fmt"
 	"log"
@@ -8,7 +9,8 @@ import (
 )
 
 func main() {
+	config.Load()
 	r := router.New()
-	fmt.Println("rodando api na porta :3001")
-	log.Fatal(http.ListenAndServe(":3001", r))
+	fmt.Println("rodando api na porta ", config.ApiPort)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.ApiPort), r))
 }

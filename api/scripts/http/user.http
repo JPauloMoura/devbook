@@ -1,0 +1,10 @@
+### Criar usuario
+POST http://localhost:3001/users HTTP/1.1
+content-type: application/json
+
+{
+    "name":"fulano",
+    "nick": "fulano1",
+    "email": "fulano@email.com",
+    "password": "12354"
+}
