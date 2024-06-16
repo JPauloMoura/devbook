@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres-devbook
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: username
+      POSTGRES_DB: devbook
+    ports:
+      - 5432:5432
+    volumes:
+      - ./scripts/sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./.data/postgres:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:8.2
+    container_name: pgadmin-devbook
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: email@email.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    ports:
+      - 8080:80
+    volumes:
+      - ./.data/pgadmin:/var/lib/pgadmin
